@@ -1,0 +1,63 @@
+<div class="container">  
+    <h1>Gift Card</h1>  
+    <div *ngIf="imageUrl">  
+      <img [src]="imageUrl" alt="Uploaded Image" style="max-width: 100%" />  
+    </div>  
+    <form [formGroup]="cardForm" (ngSubmit)="downloadImage()">  
+      <div class="file-upload">  
+        <label>File Upload</label>  
+        <div  
+          class="upload-area"  
+          (dragover)="onDragOver($event)"  
+          (dragleave)="onDragLeave($event)"  
+          (drop)="onDrop($event)"  
+        >  
+          <input  
+            type="file"  
+            (change)="onFileSelected($event)"  
+            accept="image/*"  
+            id="file-upload"  
+          />  
+          <i class="fas fa-cloud-upload-alt"></i>  
+          <label for="file-upload" class="file-upload-label">Browse Files</label>  
+          <p class="file-upload-text">Drag and drop files here</p>  
+        </div>  
+        <div  
+          *ngIf="cardForm.get('file')?.invalid && cardForm.get('file')?.touched"  
+        >  
+          <small class="error">File is required.</small>  
+        </div>  
+      </div>  
+      <div class="field">  
+        <label>Dear</label>  
+        <input formControlName="dear" />  
+        <div  
+          *ngIf="cardForm.get('dear')?.invalid && cardForm.get('dear')?.touched"  
+        >  
+          <small class="error">Dear is required.</small>  
+        </div>  
+      </div>  
+      <div class="field">  
+        <label>Message</label>  
+        <input formControlName="message" />  
+        <div  
+          *ngIf="  
+            cardForm.get('message')?.invalid && cardForm.get('message')?.touched  
+          "  
+        >  
+          <small class="error">Message is required.</small>  
+        </div>  
+      </div>  
+      <div class="field">  
+        <label>From</label>  
+        <input formControlName="from" />  
+        <div  
+          *ngIf="cardForm.get('from')?.invalid && cardForm.get('from')?.touched"  
+        >  
+          <small class="error">From is required.</small>  
+        </div>  
+      </div>  
+      <button type="submit" [disabled]="cardForm.invalid">Download</button>  
+    </form>  
+  </div>  
+  
